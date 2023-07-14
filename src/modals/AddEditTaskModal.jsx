@@ -5,7 +5,7 @@ import crossIcon from "../assets/icon-cross.svg";
 function AddEditTaskModal({ type, device, setOpenAddEditTask }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  
+
   const [subtasks, setSubtasks] = useState([
     { title: "", isCompleted: false, id: uuidv4() },
     { title: "", isCompleted: false, id: uuidv4() },
@@ -76,32 +76,40 @@ function AddEditTaskModal({ type, device, setOpenAddEditTask }) {
             Subtasks
           </label>
 
-          {
-            subtasks.map((subtask, index) => {
-                return (
-                    <div
-                    key={index}
-                    className=" flex items-center w-full"
-                    >
-                    <input 
-                    onChange={() => {
-                      onChange(subtask.id, e.target.value)
-                    }}
-                    type="text"
-                    value={subtask.title}
-                    className=" bg-transparent outline-none focus:border-0 border flex-grow px-4 py-2 rounded-md text-sm border-gray-600 focus:outline-[#635fc7] "
-                    placeholder=" e.g Take coffee break"
-                    />
-                    <img 
-                    onClick={() => {
-                      onDelete(subtask.id)
-                    }}
-                    src={ crossIcon } className=" m-4 cursor-pointer " />
-                    </div>
-                )
-            })
-          }
-          
+          {subtasks.map((subtask, index) => {
+            return (
+              <div key={index} className=" flex items-center w-full">
+                <input
+                  onChange={() => {
+                    onChange(subtask.id, e.target.value);
+                  }}
+                  type="text"
+                  value={subtask.title}
+                  className=" bg-transparent outline-none focus:border-0 border flex-grow px-4 py-2 rounded-md text-sm border-gray-600 focus:outline-[#635fc7] "
+                  placeholder=" e.g Take coffee break"
+                />
+                <img
+                  onClick={() => {
+                    onDelete(subtask.id);
+                  }}
+                  src={crossIcon}
+                  className=" m-4 cursor-pointer "
+                />
+              </div>
+            );
+          })}
+
+          <button
+            onClick={() => {
+              setSubtasks((state) => [
+                ...state,
+                { title: "", isCompleted: false, id: uuidv4() },
+              ]);
+            }}
+            className=" w-full items-center dark:text-[#635fc7] dark:bg-white text-white bg-[#635fc7] py-2 rounded-full"
+          >
+            + Add New Subtask
+          </button>
         </div>
       </div>
     </div>
