@@ -3,7 +3,7 @@ import boardsSlice from "./boardsSlice";
 
 const store = configureStore({
   reducer: {
-    boardsSlice: boardsSlice.reducer,
+    boards: boardsSlice.reducer,
   },
 });
 
