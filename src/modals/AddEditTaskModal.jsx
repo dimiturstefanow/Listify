@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid"; // Add the closing parenthesis for the import statement
+import { v4 as uuidv4 } from "uuid";
+import crossIcon from "../assets/icon-cross.svg";
 
 function AddEditTaskModal({ type, device, setOpenAddEditTask }) {
   const [title, setTitle] = useState("");
@@ -9,6 +10,19 @@ function AddEditTaskModal({ type, device, setOpenAddEditTask }) {
     { title: "", isCompleted: false, id: uuidv4() },
     { title: "", isCompleted: false, id: uuidv4() },
   ]);
+
+  const onDelete = (id) => {
+    setSubtasks((perState) => perState.filter((el) => el.id !== id));
+  };
+
+  const onChange = (id, newValue) => {
+    setSubtasks((pervState) => {
+      const newState = [...pervState];
+      const subtask = newState.find((subtask) => subtask.id === id);
+      subtask.title = newValue;
+      return newState;
+    });
+  };
 
   return (
     <div
@@ -70,10 +84,19 @@ function AddEditTaskModal({ type, device, setOpenAddEditTask }) {
                     className=" flex items-center w-full"
                     >
                     <input 
+                    onChange={() => {
+                      onChange(subtask.id, e.target.value)
+                    }}
                     type="text"
                     value={subtask.title}
-                    className=" bg-transparent outline-none focus:border-0 flex-grow px-4 py-2 rounded-md text-sm border-gray-600 focus:outline-[#635fc7] "
+                    className=" bg-transparent outline-none focus:border-0 border flex-grow px-4 py-2 rounded-md text-sm border-gray-600 focus:outline-[#635fc7] "
+                    placeholder=" e.g Take coffee break"
                     />
+                    <img 
+                    onClick={() => {
+                      onDelete(subtask.id)
+                    }}
+                    src={ crossIcon } className=" m-4 cursor-pointer " />
                     </div>
                 )
             })
