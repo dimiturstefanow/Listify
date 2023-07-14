@@ -7,11 +7,13 @@ import HeaderDropDown from "./HeaderDropDown";
 import AddEditBoardModal from "../modals/AddEditBoardModal";
 import useDarkMode from "../Hooks/useDarkMode";
 import { useDispatch, useSelector } from "react-redux";
+import AddEditTaskModal from "../modals/AddEditTaskModal";
 
 function Header({ setBoardModalOpen, boardModalOpen }) {
 const dispatch = useDispatch()
 
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [openAddEditTask, setOpenAddEditTask] = useState(false)
   const [boadType, setBoadType] = useState("add");
 
   const boards = useSelector((state) => state.boards)
@@ -45,7 +47,13 @@ const dispatch = useDispatch()
         <div className=" flex space-x-4 items-center md:space-x-6">
           <button className=" hidden md:block button">+ Add New Task</button>
 
-          <button className=" button py-1 px-3 md:hidden">+</button>
+          <button 
+          onClick={
+            () => {
+              setOpenAddEditTask(state => !state) 
+            }
+          }
+          className=" button py-1 px-3 md:hidden">+</button>
           <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
         </div>
       </header>
@@ -63,6 +71,10 @@ const dispatch = useDispatch()
           setBoardModalOpen={setBoardModalOpen}
         />
       )}
+
+      {
+        openAddEditTask && <AddEditTaskModal setOpenAddEditTask={setOpenAddEditTask} device="mobile" />
+      }
     </div>
   );
 }
