@@ -4,8 +4,9 @@ import iconDown from "../assets/icon-chevron-down.svg";
 import iconUp from "../assets/icon-chevron-up.svg";
 import elipsis from "../assets/icon-vertical-ellipsis.svg";
 import HeaderDropDown from "./HeaderDropDown";
+import AddEditBoardModal from "../modals/AddEditBoardModal";
 
-function Header() {
+function Header({setBoardModalOpen, boardModalOpen}) {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   return (
@@ -43,7 +44,12 @@ function Header() {
         </div>
       </header>
 
-      {openDropdown && <HeaderDropDown setOpenDropdown={setOpenDropdown} />}
+      {openDropdown && <HeaderDropDown setBoardModalOpen={setBoardModalOpen} setOpenDropdown={setOpenDropdown} />}
+
+      {
+        boardModalOpen && <AddEditBoardModal setBoardModalOpen={setBoardModalOpen} />
+      }
+
     </div>
   );
 }

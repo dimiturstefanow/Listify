@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import Header from "./components/Header";
 import Center from "./components/Center";
 
-function App(){
+function App() {
+  const [boardModalOpen, setBoardModalOpen] = useState(false);
+
   return (
     <div>
-      
       {/* Header Section */}
 
-      <Header/>
+      <Header
+        boardModalOpen={boardModalOpen}
+        setBoardModalOpen={setBoardModalOpen}
+      />
 
       {/* Center Section */}
 
       <Center />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
