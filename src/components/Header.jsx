@@ -34,15 +34,16 @@ function Header() {
         {/* right side */}
 
         <div className=" flex space-x-4 items-center md:space-x-6">
-          <button className=" button">+ Add New Task</button>
+          <button className=" hidden md:block button">
+            + Add New Task
+            </button>
 
           <button className=" button py-1 px-3 md:hidden">+</button>
           <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
-          
         </div>
       </header>
 
-      {openDropdown && <HeaderDropDown />}
+      {openDropdown && <HeaderDropDown setOpenDropdown={setOpenDropdown} />}
     </div>
   );
 }
