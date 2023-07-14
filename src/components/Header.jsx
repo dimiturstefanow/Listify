@@ -6,8 +6,9 @@ import elipsis from "../assets/icon-vertical-ellipsis.svg";
 import HeaderDropDown from "./HeaderDropDown";
 import AddEditBoardModal from "../modals/AddEditBoardModal";
 
-function Header({setBoardModalOpen, boardModalOpen}) {
+function Header({ setBoardModalOpen, boardModalOpen }) {
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [boadType, setBoadType] = useState("add");
 
   return (
     <div className="p-4 fixed left-0 bg-white dark:bg-[#2b2c37] z-50 right-0">
@@ -35,21 +36,26 @@ function Header({setBoardModalOpen, boardModalOpen}) {
         {/* right side */}
 
         <div className=" flex space-x-4 items-center md:space-x-6">
-          <button className=" hidden md:block button">
-            + Add New Task
-            </button>
+          <button className=" hidden md:block button">+ Add New Task</button>
 
           <button className=" button py-1 px-3 md:hidden">+</button>
           <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
         </div>
       </header>
 
-      {openDropdown && <HeaderDropDown setBoardModalOpen={setBoardModalOpen} setOpenDropdown={setOpenDropdown} />}
+      {openDropdown && (
+        <HeaderDropDown
+          setBoardModalOpen={setBoardModalOpen}
+          setOpenDropdown={setOpenDropdown}
+        />
+      )}
 
-      {
-        boardModalOpen && <AddEditBoardModal setBoardModalOpen={setBoardModalOpen} />
-      }
-
+      {boardModalOpen && (
+        <AddEditBoardModal
+          type={boadType}
+          setBoardModalOpen={setBoardModalOpen}
+        />
+      )}
     </div>
   );
 }
