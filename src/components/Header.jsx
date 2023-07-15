@@ -73,7 +73,7 @@ const dispatch = useDispatch()
       )}
 
       {
-        openAddEditTask && <AddEditTaskModal setOpenAddEditTask={setOpenAddEditTask} device="mobile" />
+        openAddEditTask && <AddEditTaskModal setOpenAddEditTask={setOpenAddEditTask} device="mobile" type="add" />
       }
     </div>
   );

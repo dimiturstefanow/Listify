@@ -8,6 +8,7 @@ function AddEditTaskModal({
   type,
   device,
   setOpenAddEditTask,
+  taskIndex,
   pervColIndex = 0,
 }) {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function AddEditTaskModal({
   const columns = board.columns;
   const col = columns.find((col, index) => index === pervColIndex);
   const [status, setStatus] = useState(columns[pervColIndex].name);
-const [newColIndex, setNewColIndex] = useState(pervColIndex)
+  const [newColIndex, setNewColIndex] = useState(pervColIndex);
   const [subtasks, setSubtasks] = useState([
     { title: "", isCompleted: false, id: uuidv4() },
     { title: "", isCompleted: false, id: uuidv4() },
@@ -42,9 +43,9 @@ const [newColIndex, setNewColIndex] = useState(pervColIndex)
   };
 
   const onChangeStatus = (e) => {
-    setStatus(e.target.value)
-    setNewColIndex(e.target.selectedIndex)
-  }
+    setStatus(e.target.value);
+    setNewColIndex(e.target.selectedIndex);
+  };
 
   const validate = () => {
     setIsValid(false);
@@ -52,7 +53,7 @@ const [newColIndex, setNewColIndex] = useState(pervColIndex)
       return false;
     }
     for (let i = 0; i < subtasks.length; i++) {
-      if (!subtasks[i].name.trim()) {
+      if (!subtasks[i].title.trim()) {
         return false;
       }
     }
@@ -68,6 +69,20 @@ const [newColIndex, setNewColIndex] = useState(pervColIndex)
           title,
           description,
           subtasks,
+          status,
+          newColIndex,
+        })
+      );
+    } else {
+      dispatch(
+        boardsSlice.actions.editTask({
+          title,
+          description,
+          subtasks,
+          status,
+          taskIndex,
+          pervColIndex,
+          newColIndex,
         })
       );
     }
@@ -169,9 +184,10 @@ const [newColIndex, setNewColIndex] = useState(pervColIndex)
           </label>
 
           <select
-          value={status}
-          onChange={(e) => onChangeStatus(e)}
-          className=" select-status flex flex-grow px-4 py-2 rounded-md text-sm bg-transparent focus:border-0 border border-gray-300 focus:outline-[#635fc7] outline-none ">
+            value={status}
+            onChange={(e) => onChangeStatus(e)}
+            className=" select-status flex flex-grow px-4 py-2 rounded-md text-sm bg-transparent focus:border-0 border border-gray-300 focus:outline-[#635fc7] outline-none "
+          >
             {columns.map((column, index) => (
               <option value={column.name} key={index}>
                 {column.name}
@@ -183,7 +199,8 @@ const [newColIndex, setNewColIndex] = useState(pervColIndex)
             onClick={() => {
               const isValid = validate();
               if (isValid) {
-                onSubmit(type);
+                onSubmit(type)
+                setOpenAddEditTask(false)
               }
             }}
             className=" w-full items-center text-white bg-[#635fc7] py-2 rounded-full  "
