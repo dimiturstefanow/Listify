@@ -4,6 +4,7 @@ import Center from "./components/Center";
 import useDarkMode from "./Hooks/useDarkMode";
 import { useDispatch, useSelector } from "react-redux";
 import boardsSlice from "./redux/boardsSlice";
+import EmptyBoard from "./components/EmptyBoard";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,17 +18,31 @@ function App() {
   const [boardModalOpen, setBoardModalOpen] = useState(false);
 
   return (
-    <div>
-      {/* Header Section */}
+    <div
+    className=" overflow-hidden overflow-x-scroll"
+    >
+      <>
+      {boards.length > 0 ? 
+    <>
+     {/* Header Section */}
 
-      <Header
+     <Header
         boardModalOpen={boardModalOpen}
         setBoardModalOpen={setBoardModalOpen}
-      />
+        />
 
       {/* Center Section */}
 
       <Center />
+  
+    </>  
+    : 
+    <> 
+    <EmptyBoard type="add" />
+    </>
+    }
+     
+        </>
     </div>
   );
 }
