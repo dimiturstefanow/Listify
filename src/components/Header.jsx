@@ -9,6 +9,8 @@ import useDarkMode from "../Hooks/useDarkMode";
 import { useDispatch, useSelector } from "react-redux";
 import AddEditTaskModal from "../modals/AddEditTaskModal";
 import ElipsisMenu from "./ElipsisMenu";
+import DeleteModal from "../modals/DeleteModal";
+import boardsSlice from "../redux/boardsSlice";
 
 function Header({ setBoardModalOpen, boardModalOpen }) {
   const dispatch = useDispatch();
@@ -30,6 +32,12 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
   const setOpenDeleteModal = () => {
     setIsDeleteModalOpen(true);
     setIsElipsisOpen(false);
+  };
+
+  const onDeleteBtnClick = () => {
+    dispatch(boardsSlice.actions.deleteBoard());
+    dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
+    setIsDeleteModalOpen(false)
   };
 
   return (
@@ -80,10 +88,13 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
           />
         </div>
 
-        {isElipsisOpen && <ElipsisMenu 
-        setOpenDeleteModal={setIsDeleteModalOpen}
-        setOpenEditModal={setOpenEditModal}
-        type="Boards" />}
+        {isElipsisOpen && (
+          <ElipsisMenu
+            setOpenDeleteModal={setOpenDeleteModal}
+            setOpenEditModal={setOpenEditModal}
+            type="Boards"
+          />
+        )}
       </header>
 
       {openDropdown && (
@@ -105,6 +116,15 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
           setOpenAddEditTask={setOpenAddEditTask}
           device="mobile"
           type="add"
+        />
+      )}
+
+      {isDeleteModalOpen && (
+        <DeleteModal
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          onDeleteBtnClick={onDeleteBtnClick}
+          title={board.name}
+          type="board"
         />
       )}
     </div>
