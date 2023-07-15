@@ -58,7 +58,7 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
           </h3>
           <div className=" flex items-center">
             <h3 className="truncate max-w-[200px] md:text-2xl text-xl font-bold md:ml-20 fons-sans ">
-              {board.name}
+              {boards.name}
             </h3>
             <img
               src={openDropdown ? iconUp : iconDown}
