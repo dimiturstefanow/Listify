@@ -37,7 +37,13 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
   const onDeleteBtnClick = () => {
     dispatch(boardsSlice.actions.deleteBoard());
     dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
-    setIsDeleteModalOpen(false)
+    setIsDeleteModalOpen(false);
+  };
+
+  const onDropdownClick = () => {
+    setOpenDropdown((state) => !state);
+    setIsElipsisOpen(false);
+    setBoadType("add");
   };
 
   return (
@@ -58,7 +64,7 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
               src={openDropdown ? iconUp : iconDown}
               alt="dropdown icon"
               className=" w-3 ml-2 cursor-pointer md:hidden"
-              onClick={() => setOpenDropdown((state) => !state)}
+              onClick={onDropdownClick}
             />
           </div>
         </div>
