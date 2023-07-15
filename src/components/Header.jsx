@@ -54,7 +54,7 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
         <div className=" flex items-center space-x-2 md:space-x-4">
           <img src={logo} alt="logo" className="h-6 w-6" />
           <h3 className="hidden md:inline-block font-bold font-sans md:text-4xl">
-            Kanban
+            management app
           </h3>
           <div className=" flex items-center">
             <h3 className="truncate max-w-[200px] md:text-2xl text-xl font-bold md:ml-20 fons-sans ">
@@ -138,7 +138,7 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
         <DeleteModal
           setIsDeleteModalOpen={setIsDeleteModalOpen}
           onDeleteBtnClick={onDeleteBtnClick}
-          title={board.name}
+          title={boards.name}
           type="board"
         />
       )}
