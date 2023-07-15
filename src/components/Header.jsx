@@ -14,12 +14,23 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
   const dispatch = useDispatch();
 
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [openAddEditTask, setOpenAddEditTask] = useState(false);
   const [isElipsisOpen, setIsElipsisOpen] = useState(false);
   const [boadType, setBoadType] = useState("add");
 
   const boards = useSelector((state) => state.boards);
   const board = boards?.find((board) => board.isActive);
+
+  const setOpenEditModal = () => {
+    setBoardModalOpen(true);
+    setIsElipsisOpen(false);
+  };
+
+  const setOpenDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+    setIsElipsisOpen(false);
+  };
 
   return (
     <div className="p-4 fixed left-0 bg-white dark:bg-[#2b2c37] z-50 right-0">
@@ -62,14 +73,17 @@ function Header({ setBoardModalOpen, boardModalOpen }) {
             onClick={() => {
               setBoadType("edit");
               setOpenDropdown(false);
-              setIsElipsisOpen(state => !state)
+              setIsElipsisOpen((state) => !state);
             }}
             alt="elipsis"
             className=" cursor-pointer h-6"
           />
         </div>
 
-        {isElipsisOpen && <ElipsisMenu type="Boards" />}
+        {isElipsisOpen && <ElipsisMenu 
+        setOpenDeleteModal={setIsDeleteModalOpen}
+        setOpenEditModal={setOpenEditModal}
+        type="Boards" />}
       </header>
 
       {openDropdown && (
