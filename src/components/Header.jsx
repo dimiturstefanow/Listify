@@ -8,16 +8,18 @@ import AddEditBoardModal from "../modals/AddEditBoardModal";
 import useDarkMode from "../Hooks/useDarkMode";
 import { useDispatch, useSelector } from "react-redux";
 import AddEditTaskModal from "../modals/AddEditTaskModal";
+import ElipsisMenu from "./ElipsisMenu";
 
 function Header({ setBoardModalOpen, boardModalOpen }) {
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [openAddEditTask, setOpenAddEditTask] = useState(false)
+  const [openAddEditTask, setOpenAddEditTask] = useState(false);
+  const [isElipsisOpen, setIsElipsisOpen] = useState(false);
   const [boadType, setBoadType] = useState("add");
 
-  const boards = useSelector((state) => state.boards)
-  const board = boards?.find( board => board.isActive)
+  const boards = useSelector((state) => state.boards);
+  const board = boards?.find((board) => board.isActive);
 
   return (
     <div className="p-4 fixed left-0 bg-white dark:bg-[#2b2c37] z-50 right-0">
@@ -47,15 +49,27 @@ const dispatch = useDispatch()
         <div className=" flex space-x-4 items-center md:space-x-6">
           <button className=" hidden md:block button">+ Add New Task</button>
 
-          <button 
-          onClick={
-            () => {
-              setOpenAddEditTask(state => !state) 
-            }
-          }
-          className=" button py-1 px-3 md:hidden">+</button>
-          <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
+          <button
+            onClick={() => {
+              setOpenAddEditTask((state) => !state);
+            }}
+            className=" button py-1 px-3 md:hidden"
+          >
+            +
+          </button>
+          <img
+            src={elipsis}
+            onClick={() => {
+              setBoadType("edit");
+              setOpenDropdown(false);
+              setIsElipsisOpen(state => !state)
+            }}
+            alt="elipsis"
+            className=" cursor-pointer h-6"
+          />
         </div>
+
+        {isElipsisOpen && <ElipsisMenu type="Boards" />}
       </header>
 
       {openDropdown && (
@@ -72,9 +86,13 @@ const dispatch = useDispatch()
         />
       )}
 
-      {
-        openAddEditTask && <AddEditTaskModal setOpenAddEditTask={setOpenAddEditTask} device="mobile" type="add" />
-      }
+      {openAddEditTask && (
+        <AddEditTaskModal
+          setOpenAddEditTask={setOpenAddEditTask}
+          device="mobile"
+          type="add"
+        />
+      )}
     </div>
   );
 }
