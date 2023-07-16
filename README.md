@@ -8,6 +8,7 @@ ___
 ## Technology used:
 * ReactJS
 * Sass
+* LocalStorage
 ___
 ### Screenshot:
 
