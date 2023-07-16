@@ -17,10 +17,10 @@ function Column({ colIndex }) {
     "bg-sky-500",
   ];
 
-  const dispatch = useDispatch();
   const [color, setColor] = useState(null);
-  const boards = useSelector((state) => state.boards);
-  const board = boards.find((board) => board.isActive === true);
+  const dispatch = useDispatch();
+  const boards = useSelector(state => state.boards);
+  const board = boards.find(board => board.isActive === true);
   const col = board.columns.find((col, i) => i === colIndex);
 
   useEffect(() => {

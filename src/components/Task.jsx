@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import TaskModal from "./TaskModal";
+import TaskModal from "../modals/TaskModal";
 
 function Task({ colIndex, taskIndex }) {
   const boards = useSelector((state) => state.boards);
@@ -33,7 +33,14 @@ function Task({ colIndex, taskIndex }) {
         </p>
       </div>
 
-      {isTaskModalOpen && <TaskModal />}
+      {isTaskModalOpen && (
+      <TaskModal
+      colIndex={colIndex}
+      taskIndex={taskIndex}
+      setIsTaskModalOpen={setIsTaskModalOpen}
+      />
+      )
+    }
     </div>
   );
 }
