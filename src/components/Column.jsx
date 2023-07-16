@@ -1,6 +1,8 @@
 import { shuffle } from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Task from "./Task";
+import boardsSlice from "../redux/boardsSlice";
 
 function Column({ colIndex }) {
   const colors = [
@@ -15,23 +17,28 @@ function Column({ colIndex }) {
     "bg-sky-500",
   ];
 
-  const [color, setColor] = useState(null);
-
   const dispatch = useDispatch();
-  const boards = useSelector(state => state.boards);
-  const board = boards.find(board => board.isActive);
+  const [color, setColor] = useState(null);
+  const boards = useSelector((state) => state.boards);
+  const board = boards.find((board) => board.isActive === true);
   const col = board.columns.find((col, i) => i === colIndex);
 
   useEffect(() => {
-    setColor(shuffle(colors).pop());
+    setColor(shuffle(colors).pop())
   }, [dispatch]);
 
-  return;
-  <div className=" scrollbar-hide mx-5 pt-[90px] min-w-[280px]">
-    <p className=" font-semibold flex  items-center  gap-2 tracking-widest md:tracking-[.2em] text-[#828fa3]">
-      <div className={` rounded-full w-4 h-4 ${color}`} />
-    </p>
-  </div>;
+  return (
+    <div className="scrollbar-hide mx-5 pt-[90px] min-w-[280px]">
+      <p className="font-semibold flex items-center gap-2 tracking-widest md:tracking-[.2em] text-[#828fa3]">
+        <div className={`rounded-full w-4 h-4 ${color}`} />
+        {col.name} ({col.tasks.length})
+      </p>
+
+      {col.tasks.map((task, index) => (
+        <Task key={index} taskIndex={index} colIndex={colIndex} />
+      ))}
+    </div>
+  );
 }
 
 export default Column;

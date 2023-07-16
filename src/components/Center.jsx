@@ -46,7 +46,7 @@ useEffect(() => {
       {/* Columns Section */}
 
       {
-        columns.map((col, index) => (
+        columns && columns.map((col, index) => (
           <Column key={index} colIndex={index} />
         ))
       }
