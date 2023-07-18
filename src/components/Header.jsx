@@ -123,7 +123,7 @@ function Header({ setIsBoardModalOpen, isBoardModalOpen }) {
           device="mobile"
         />
       )}
-
+{/* checking */}
       {isBoardModalOpen && (
         <AddEditBoardModal
           setBoardType={setBoardType}
