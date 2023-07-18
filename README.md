@@ -12,6 +12,7 @@ ___
 ___
 ### Screenshot:
 
-![task-management-screenshot](https://github.com/dimiturstefanow/RoyaltyHomes/assets/126346506/77f404c3-1bfb-43fc-b2b3-5b089feb4d53)
+![simple table](https://github.com/dimiturstefanow/table-simple-project/assets/126346506/2dfa956e-36d1-4603-b124-7629a92456a7)
+
 
 
