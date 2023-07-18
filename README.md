@@ -12,7 +12,8 @@ ___
 ___
 ### Screenshot:
 
-![simple table](https://github.com/dimiturstefanow/table-simple-project/assets/126346506/2dfa956e-36d1-4603-b124-7629a92456a7)
+![management app scrn](https://github.com/dimiturstefanow/MinimalisticManagementApp/assets/126346506/747f5707-56b5-445a-b1a4-062222f2e538)
+
 
 
 
