@@ -48,7 +48,7 @@ function Home() {
         />
       )}
 
-      {/* Columns Section */}
+      {/* Columns Section to be done */}
 
       {columns.length > 0 ? (
         <>
